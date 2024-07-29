@@ -55,12 +55,8 @@ export default function Chat() {
       },
       body: JSON.stringify({ message: userMessage.trim(), socket_id: socketId })
     })
-    setMessageLog(prev => [...prev, { selfMessage: true, message: userMessage }])
+    setMessageLog(prev => [...prev, { selfMessage: true, message: userMessage.trim() }])
     setUserMessage("")
-  }
-
-  function handleInputChange(e) {
-    setUserMessage(e.target.value)
   }
 
   return (
@@ -89,7 +85,7 @@ export default function Chat() {
           })}
         </div>
         <form onSubmit={handleChatSubmit}>
-          <input value={userMessage} ref={chatField} onChange={handleInputChange} type="text" autoComplete="off" placeholder="Your message here" />
+          <input value={userMessage} ref={chatField} onChange={e => setUserMessage(e.target.value)} type="text" autoComplete="off" placeholder="Your message here" />
         </form>
       </div>
     </>
